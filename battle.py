@@ -75,7 +75,7 @@ def draw_field(field, show_ships):
 
 
 def parse_coords(coords):
-    if coords is None:
+    if coords is None or len(coords) < 2:
         return None
     c = ' '
     if coords[0] == '-':
@@ -275,7 +275,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                     line = line[:hit[0]] + 'X' + line[hit[0] + 1:]
                     field[hit[1]] = line
                     ships = check_field(field)
-                    if sum(ships) == 0:
+                    if ships is not None and sum(ships) == 0:
                         player['state'] = 'won'
                         player['opponent']['state'] = 'lost'
                         history = [player] + history[:25]
