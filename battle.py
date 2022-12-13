@@ -31,8 +31,6 @@ def check_field(field):
             if size > 4:
                 return None
             ships[size - 1] += 1
-            if ships[size - 1] > 5 - size:
-                return None
     return ships
 
 
@@ -194,17 +192,17 @@ class RequestHandler(BaseHTTPRequestHandler):
             response += '</pre>' \
                         '<p>'
             comma = ''
-            if ships[3] < 1:
+            if ships[3] != 1:
                 response += '1 four cell'
                 comma = ', '
-            if ships[2] < 2:
-                response += comma + str(2 - ships[2]) + ' triple cell'
+            if ships[2] != 2:
+                response += comma + '2 triple cell'
                 comma = ', '
-            if ships[1] < 3:
-                response += comma + str(3 - ships[1]) + ' double cell'
+            if ships[1] != 3:
+                response += comma + '3 double cell'
                 comma = ', '
-            if ships[0] < 4:
-                response += comma + str(4 - ships[0]) + ' single cell'
+            if ships[0] != 4:
+                response += comma + '4 single cell'
                 comma = ', '
             if comma != '':
                 response += ' ships to be placed.' \
